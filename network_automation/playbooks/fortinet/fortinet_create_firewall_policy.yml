@@ -1,0 +1,29 @@
+---
+- name: "create vlan"
+  hosts: localhost
+  vars:
+   host: "192.168.1.31"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure interfaces.
+    fortios_ipv4_policy:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      id: 3
+      comment: "Created by ansible"
+      src_intf: TRANS_InternetFw
+      dst_intf: DMZ_PROD
+      src_addr: all
+      dst_addr: all
+      service: ALL_ICMP
+      nat: false
+      state: present
+      policy_action: accept
+      logtraffic: disable   
+
+
+

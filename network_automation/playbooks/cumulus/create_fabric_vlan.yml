@@ -1,0 +1,20 @@
+---
+- name: Create new fabric vlan
+  hosts: fabric
+  vars_prompt:
+
+    - name: id
+      prompt: "Vlan id to add? example: 10"
+      private: no
+
+    - name: description
+      prompt: "Please enter a description for the new vlan"
+      private: no
+  gather_facts: false
+  connection: ssh
+  tasks:
+  - name: Add vlan to fabric
+    nclu:
+      commands:
+        - add vlan "{{id}}" alias "{{description}}"
+      commit: true
