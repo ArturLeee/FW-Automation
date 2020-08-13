@@ -1,0 +1,17 @@
+--- 
+- name: Backup vyos routers
+  hosts: vyos
+  connection: network_cli
+  tasks:
+  - name: Backup current config
+    vyos_command:
+      commands:
+        - show configuration commands | match banner
+    register: banner 
+  - debug:
+      msg: "NO BANNER"
+    when: banner['stdout'][0] | replace('set system login banner','') == ""
+  - debug:
+      msg: "BANNER OK"
+    when: banner['stdout'][0] | replace('set system login banner','') != ""
+

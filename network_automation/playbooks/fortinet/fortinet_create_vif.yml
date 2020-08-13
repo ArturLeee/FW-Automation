@@ -20,9 +20,7 @@
         name: "interface ansible"
         alias: "ansible alias"
         allowaccess: "ping"
-        defaultgw: "enable"
         description: "ansible description"
-        vdom: "root"
         type: "vlan"
         ip: 192.168.5.1/24
-        interface: "port2"
+        interface: "ansible interface"

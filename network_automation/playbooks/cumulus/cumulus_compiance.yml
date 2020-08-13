@@ -1,0 +1,17 @@
+---
+- name: Create new fabric vlan
+  hosts: fabric
+  gather_facts: false
+  connection: ssh
+  tasks:
+  - name: collect banner
+    shell: cat /etc/issue.net
+    register: banner
+
+  - debug:
+      msg: "NO BANNER"
+    when: banner['stdout'] ==  ""
+  - debug:
+      msg: "OK"
+    when: banner['stdout'] !=  ""
+
