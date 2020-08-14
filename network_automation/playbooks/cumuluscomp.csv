@@ -1,0 +1,4 @@
+host,type,result
+leaf1,telnet,COMPLIANT
+leaf2,banner,COMPLIANT
+leaf1,banner,NOT COMPLIANT

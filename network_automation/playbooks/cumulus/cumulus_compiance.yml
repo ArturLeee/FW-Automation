@@ -7,6 +7,9 @@
   - name: collect banner
     shell: cat /etc/issue.net
     register: banner
+ 
+  - debug:
+      msg: "{{banner}}"
 
   - debug:
       msg: "NO BANNER"
@@ -14,4 +17,42 @@
   - debug:
       msg: "OK"
     when: banner['stdout'] !=  ""
+  - debug:
+      msg: "telnet disabled"
+  
+  - set_fact:
+      telnet_result: COMPLIANT
+
+  - set_fact:
+      banner_result: COMPLIANT
+    when: banner['stdout'] !=  ""
+
+  - set_fact:
+      banner_result: NOT COMPLIANT
+    when: banner['stdout'] == ""
+
+
+  - name: remove old files
+    file:
+      path: ../cumuluscomp.csv
+      state: absent
+    run_once: true
+    delegate_to: localhost
+
+  - copy:
+      content: host,type,result
+      dest: ../cumuluscomp.csv
+    run_once: true
+    delegate_to: localhost
+
+  - lineinfile:
+      path: ../cumuluscomp.csv
+      line: "{{ansible_hostname}},telnet,{{ telnet_result }}"
+    delegate_to: localhost
+
+  - lineinfile:
+      path: ../cumuluscomp.csv
+      line: "{{ansible_hostname}},banner,{{ banner_result }}"
+    delegate_to: localhost
+
 

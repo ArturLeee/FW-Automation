@@ -1,0 +1,65 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> <script 
+src="//code.jquery.com/jquery-1.11.1.min.js"></script> <!------ Include the above in your HEAD tag ----------> <div class="container">
+    <div class="row">
+        <div class="col-xs-10">
+            <div class="panel panel-primary">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <h2 class="panel-title">
+                        Network compliance
+                    </h2>
+                </div>
+                <div class="panel-body">
+                    <h3>
+                        Compliance
+                    </h3>
+                </div>
+                    <ul class="list-group">
+                    
+                    <li class="list-group-item">
+                    <h4>VYOS</h4>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>TECHNOLOGIE</th>
+                                <th>COMPLIANCY</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+			{% for comp in vyos_comp['list']  %}
+                            <tr>
+                                <td>"{{comp['type']}}"</td>
+                                <td>"{{comp['result']}}"</td>
+                            </tr>
+                        {% endfor  %}
+                        </tbody>
+                    </table>
+                    </li>
+               
+                    <li class="list-group-item">
+                    <h4>CUMULUS</h4>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>HOST</th>
+                                <th>TECHNOLOGIE</th>
+                                <th>COMPLIANCY</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for comp in cumulus_comp['list'] %}
+                            <tr>
+                              <td>"{{comp['host']}}"</td>
+                              <td>"{{comp['type']}}"</td>
+                              <td>"{{comp['result']}}"</td>
+
+                            </tr>
+                        {% endfor  %}
+                        </tbody>
+                    </table>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

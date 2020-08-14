@@ -2,8 +2,11 @@
 - name: Backup vyos routers
   hosts: vyos
   connection: network_cli
+  vars:
+    telnet_result: ""
+    banner_result: ""
   tasks:
-  - name: Backup current config
+  - name: Collect banner from device
     vyos_command:
       commands:
         - show configuration commands | match banner
@@ -14,4 +17,49 @@
   - debug:
       msg: "BANNER OK"
     when: banner['stdout'][0] | replace('set system login banner','') != ""
+
+  - set_fact:
+      banner_result: COMPLIANT
+    when: banner['stdout'][0] | replace('set system login banner','') != ""
+  
+  - set_fact:
+      banner_result: NOT COMPLIANT
+    when: banner['stdout'][0] | replace('set system login banner','') == ""
+
+
+  - name: Collect telnet config
+    vyos_command:
+      commands:
+        - show configuration commands | match telnet
+    register: telnet
+
+  - debug:
+      msg: "TELNET DISABLED"
+    when: telnet['stdout'][0]  == ""
+
+  - debug:
+      msg: "TELNET ENABLED"
+    when: telnet['stdout'][0] != ""
+  
+  - set_fact:
+      telnet_result: NOT COMPLIANT
+    when: telnet['stdout'][0] != ""
+
+  - set_fact:
+      telnet_result: COMPLIANT
+    when: telnet['stdout'][0]  == ""
+
+  - name: remove old files
+    file: 
+      path: ../vyoscomp.csv
+      state: absent
+  - copy:
+      content: type,result
+      dest: ../vyoscomp.csv
+  - lineinfile:
+      path: ../vyoscomp.csv
+      line: telnet,"{{ telnet_result }}"
+  - lineinfile:
+      path: ../vyoscomp.csv
+      line: banner,"{{ banner_result }}"
 
