@@ -1,0 +1,32 @@
+
+VLAN      Master  Interface  MAC                TunnelDest  State      Flags  LastSeen
+--------  ------  ---------  -----------------  ----------  ---------  -----  --------
+1         bridge  swp2       0c:cd:5f:22:21:02                                <1 sec
+10        bridge  bridge     0c:cd:5f:b0:0c:01              permanent         02:56:22
+10        bridge  swp2       0c:cd:5f:22:21:01                                00:03:23
+10        bridge  swp4       0c:cd:5f:df:4c:01                                00:00:03
+60        bridge  bridge     0c:cd:5f:b0:0c:01              permanent         02:56:22
+99        bridge  bridge     0c:cd:5f:b0:0c:01              permanent         02:56:22
+99        bridge  swp2       0c:cd:5f:22:21:01                                00:00:16
+99        bridge  swp2       0c:cd:5f:36:c6:01                                00:00:39
+99        bridge  swp2       0c:cd:5f:70:5c:02                                00:00:14
+99        bridge  swp2       0c:cd:5f:79:ec:00                                00:01:30
+99        bridge  swp2       0c:cd:5f:e3:cf:00                                00:00:18
+99        bridge  swp2       3e:f3:90:81:d2:7f                                00:00:57
+99        bridge  swp2       8a:43:bd:3a:e2:0e                                <1 sec
+101       bridge  bridge     0c:cd:5f:b0:0c:01              permanent         02:56:22
+101       bridge  swp2       0c:cd:5f:8e:fd:01                                00:00:06
+101       bridge  swp4       0c:cd:5f:df:4c:01                                00:00:04
+102       bridge  bridge     0c:cd:5f:b0:0c:01              permanent         02:56:22
+201       bridge  bridge     0c:cd:5f:b0:0c:01              permanent         02:56:22
+201       bridge  swp2       0c:cd:5f:22:21:01                                00:00:37
+210       bridge  bridge     0c:cd:5f:b0:0c:01              permanent         02:56:22
+210       bridge  swp2       0c:cd:5f:22:21:01                                00:01:39
+210       bridge  swp2       0c:cd:5f:70:5c:02                                00:02:32
+210       bridge  swp2       da:65:d9:5f:a0:07                                <1 sec
+untagged  bridge  swp1       0c:cd:5f:b0:0c:01              permanent         02:56:22
+untagged  bridge  swp2       0c:cd:5f:b0:0c:02              permanent         02:56:22
+untagged  bridge  swp3       0c:cd:5f:b0:0c:03              permanent         02:56:22
+untagged  bridge  swp4       0c:cd:5f:b0:0c:04              permanent         02:56:22
+untagged  bridge  swp5       0c:cd:5f:b0:0c:05              permanent         02:56:22
+untagged  bridge  swp6       0c:cd:5f:b0:0c:06              permanent         02:56:22

@@ -1,5 +1,5 @@
 ---
-- name: test
+- name: Upload dashboards
   hosts: localhost
   tasks:
   - name: read comp csv file vyos
@@ -14,11 +14,13 @@
 
   - debug:
       msg: "{{cumulus_comp}}"
+  
   - name: creating html dashboard
     template:
       src: comp_dashboard.j2
       dest: index.html
       
-  - name : upload
+  - name: upload
     shell: curl -T index.html ftp://192.168.1.41//var/www/html/index.html --user root:toor
+
 

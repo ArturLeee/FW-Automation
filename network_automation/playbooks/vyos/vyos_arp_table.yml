@@ -1,0 +1,26 @@
+--- 
+- name: Backup vyos routers
+  hosts: vyos
+  connection: network_cli
+  tasks:
+  - name: Collect banner from device
+    vyos_command:
+      commands:
+        - show protocols static arp
+    register: arp
+
+  - debug:
+      var: arp
+
+  - name: create directory
+    file:
+      path: "arp/{{ansible_date_time.date}}"
+      state: directory
+    delegate_to: localhost
+
+  - name: save mac table to file
+    copy:
+      content: "{{arp.stdout[0]}}"
+      dest: "arp/{{ansible_date_time.date}}/{{ansible_hostname}}.json"
+    delegate_to: localhost
+

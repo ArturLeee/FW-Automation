@@ -1,0 +1,25 @@
+---
+- name: Collact cumuus mac
+  hosts: fabric
+  gather_facts: true
+  connection: ssh
+  max_fail_percentage: 100
+  serial: 1
+  tasks:
+  - name: Mac address table
+    nclu:
+      commands:
+        - show bridge macs
+    register: mac
+
+  - name: create directory
+    file:
+      path: "mac/{{ansible_date_time.date}}"
+      state: directory
+    delegate_to: localhost
+
+  - name: save mac table to file
+    copy:
+      content: "{{mac.msg}}"
+      dest: "mac/{{ansible_date_time.date}}/{{ansible_hostname}}.json"
+    delegate_to: localhost
