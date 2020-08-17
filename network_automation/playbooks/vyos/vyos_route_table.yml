@@ -1,0 +1,26 @@
+--- 
+- name: Backup vyos routers
+  hosts: vyos
+  connection: network_cli
+  tasks:
+  - name: Collect route table
+    vyos_command:
+      commands:
+        - show ip route
+    register: route
+
+  - debug:
+      var: route.stdout
+
+  - name: create directory
+    file:
+      path: "routes/"
+      state: directory
+    delegate_to: localhost
+
+  - name: save mac table to file
+    copy:
+      content: "{{route.stdout[0]}}"
+      dest: "routes/{{ansible_hostname}}.txt"
+    delegate_to: localhost
+

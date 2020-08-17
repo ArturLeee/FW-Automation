@@ -4,7 +4,7 @@
 192.168.1.31 ansible_network_os=fortios
 
 [vyos]
-192.168.1.1  ansible_network_os=vyos  ansible_connection=network_cli
+192.168.1.1  ansible_network_os=vyos  ansible_connection=network_cli ansible_hostname=internetrt
 
 [fabric]
 192.168.1.21 ansible_hostname=leaf2
